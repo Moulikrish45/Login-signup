@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin Dashboard</title>
+  <link rel="stylesheet" href="/adminpanel/dashboard.css">
+  <script type="text/javascript" src="/adminpanel/superadmindashboard.js" defer></script>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Admin Dashboard</h1>
+    <div id="organization-list">
+      <h2>Organizations</h2>
+      <button id="add-organization-button">Add Organization</button>
+      <ul id="organizations">
+        <!-- List of organizations will be dynamically generated here -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modal for Adding/Editing Organizations -->
+  <div id="organization-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 id="modal-title">Add Organization</h2>
+      <form id="organization-form">
+        <label for="org-name">Organization Name</label>
+        <input type="text" id="org-name" name="org-name" required>
+        <label for="org-description">Description</label>
+        <textarea id="org-description" name="org-description" required></textarea>
+        <button type="submit" id="save-organization-button">Save</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
