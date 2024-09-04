@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
   --accent-color: #8672FF;
@@ -14,378 +14,301 @@
   box-sizing: border-box;
 }
 
-html {
-  font-family: 'Poppins', Segoe UI, sans-serif;
-  font-size: 12pt;
-  color: var(--text-color);
-  text-align: center;
-}
-
 body {
-  min-height: 100vh;
-  background-image: url(/background.webp);
-  background-size: cover;
-  background-position: right;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.wrapper {
-  display: flex;
-  width: 90%;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.super-admin-section {
-  background-color: var(--base-color);
-  width: 60%;
-  padding: 20px;
-  border-radius: 20px 0 0 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  color: var(--text-color);
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  overflow-y: auto;
+  min-height: 100vh;
+  align-items: center;
+  overflow-y: auto; /* Ensures body is scrollable */
+}
+
+header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--base-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-#organization-list {
-  width: 100%;
-  text-align: left;
-}
-
-#organization-list h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 #add-organization-button {
-  margin-bottom: 20px;
-  padding: .75em 2em;
   background-color: var(--accent-color);
   color: var(--base-color);
+  padding: 10px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: 600;
-  transition: 150ms ease;
+  transition: background-color 0.3s ease;
 }
 
 #add-organization-button:hover {
   background-color: var(--text-color);
 }
 
-#organizations {
-  list-style-type: none;
-  max-height: 60vh;
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#organization-list {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--base-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  padding-right: 10px; /* to avoid content cutting off */
+}
+
+#organization-list h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+#fallback-message {
+  font-size: 1rem;
+  color: var(--error-color);
+  text-align: center;
+}
+
+#organizations {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #organizations li {
   background-color: var(--input-color);
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#organizations li strong {
-  font-size: 1.2rem;
-  color: var(--text-color);
+.organization-item:hover {
+  background-color: #e0e4f2;
+  cursor: pointer;
 }
 
-#organizations li p {
-  font-size: 1rem;
-  color: var(--text-color);
-  margin-top: 5px;
-}
-
-#organizations li .button-group {
-  display: flex;
-  gap: 10px;
-}
-
-#organizations li button {
+.organization-actions button {
   background-color: var(--accent-color);
   color: var(--base-color);
+  padding: 5px 10px;
   border: none;
-  border-radius: 10px;
-  padding: 0.5em 1em;
+  border-radius: 5px;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: 150ms ease;
+  transition: background-color 0.3s ease;
 }
 
-#organizations li button:hover {
+.organization-actions button:hover {
   background-color: var(--text-color);
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: var(--base-color);
-  margin: 15% auto;
+.user-details-container {
+  flex: 1;
   padding: 20px;
-  border: 1px solid var(--text-color);
+  background-color: var(--base-color);
   border-radius: 10px;
-  width: 80%;
-  max-width: 500px;
-  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close-button {
-  color: var(--text-color);
-  float: right;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: var(--accent-color);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-content h2 {
-  font-size: 1.75rem;
+.user-details-header img {
+  border-radius: 50%;
   margin-bottom: 20px;
 }
 
-.modal-content label {
-  display: block;
-  margin-bottom: 10px;
+.user-details-header h3 {
+  font-size: 1.5rem;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid var(--input-color);
-  border-radius: 5px;
-  background-color: var(--input-color);
+.user-details-header small {
+  font-size: 1rem;
+  color: #777;
 }
 
-.modal-content textarea {
-  resize: vertical;
-  height: 100px;
-}
-
-.modal-content button {
-  width: 100%;
-  padding: .85em;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--accent-color);
-  color: var(--base-color);
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: 150ms ease;
-}
-
-.modal-content button:hover {
-  background-color: var(--text-color);
-}
-
-.details-box {
-  width: 40%;
-  padding: 20px;
-  background-color: var(--base-color);
-  border: 1px solid var(--text-color);
-  border-radius: 0 20px 20px 0;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+.user-details-body {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.details-box h2 {
-  font-size: 1.75rem;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.details-box strong {
-  display: block;
-  font-weight: 700;
+.user-details-body .column {
+  flex: 1;
 }
 
 #managed-organizations {
-  list-style-type: none;
-  width: 100%;
-  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  max-height: 100px; /* Adjust height */
+  overflow-y: auto;
 }
 
 #managed-organizations li {
   background-color: var(--input-color);
   padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
-#managed-organizations li button {
+/* Hide scrollbar, but allow scrolling */
+#managed-organizations::-webkit-scrollbar {
+  display: none;
+}
+
+#managed-organizations {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--base-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.close-button {
+  background-color: var(--error-color);
+  color: var(--base-color);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  float: right;
+}
+
+.modal h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.modal button {
+  width: 100%;
+  padding: 10px;
   background-color: var(--accent-color);
   color: var(--base-color);
   border: none;
-  border-radius: 10px;
-  padding: 0.5em 1em;
-  font-size: 0.8rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 150ms ease;
+  transition: background-color 0.3s ease;
 }
 
-#managed-organizations li button:hover {
+.modal button:hover {
   background-color: var(--text-color);
 }
 
+.user-details-container {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--base-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 60vh; /* Adjust height */
+}
+
+#managed-organizations {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  max-height: 100px; /* Adjust height */
+  overflow-y: auto;
+}
+
+/* Hide scrollbar, but allow scrolling */
+#managed-organizations::-webkit-scrollbar {
+  display: none;
+}
+
+#managed-organizations {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* Responsive styles */
-@media(max-width: 1100px) {
-  .wrapper {
+@media (max-width: 768px) {
+  main {
     flex-direction: column;
   }
 
-  .super-admin-section, .details-box {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .user-details-container {
+    order: 2;
+    margin: 0 10px;
+  }
+
+  #organization-list {
+    margin: 0 10px;
+  }
+
+  #add-organization-button {
     width: 100%;
     margin-bottom: 20px;
   }
-
-  .details-box {
-    border-radius: 10px;
-  }
 }
 
-@media(max-width: 768px) {
-  html {
-    font-size: 10pt;
+@media (max-width: 480px) {
+  main {
+    flex-direction: column;
+    padding: 10px;
   }
 
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  #organization-list h2 {
-    font-size: 1.5rem;
-  }
-
-  .wrapper {
-    padding: 15px;
+  .user-details-container,
+  #organization-list {
+    margin: 0 10px;
   }
 
   #add-organization-button {
     width: 100%;
-    padding: .75em;
-    font-size: 1rem;
-  }
-
-  #organizations li {
-    padding: 10px;
-  }
-
-  #organizations li strong {
-    font-size: 1.1rem;
-  }
-
-  #organizations li p {
-    font-size: 0.9rem;
-  }
-
-  .details-box {
-    padding: 10px;
-  }
-
-  #managed-organizations li {
-    padding: 8px;
-  }
-
-  #managed-organizations li button {
-    padding: 0.5em;
-    font-size: 0.7rem;
-  }
-
-  #close-details {
-    display: none;
-  }
-}
-
-@media(max-width: 480px) {
-  html {
-    font-size: 9pt;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  #organization-list h2 {
-    font-size: 1.25rem;
-  }
-
-  .super-admin-section, .details-box {
-    padding: 10px;
-  }
-
-  #add-organization-button {
-    padding: .5em;
-    font-size: 0.9rem;
-  }
-
-  #organizations li {
-    padding: 8px;
-  }
-
-  #organizations li strong {
-    font-size: 1rem;
-  }
-
-  #organizations li p {
-    font-size: 0.8rem;
-  }
-
-  #managed-organizations li {
-    padding: 5px;
-  }
-
-  #managed-organizations li button {
-    padding: 0.3em;
-    font-size: 0.7rem;
-  }
-
-  #close-details {
-    display: block;
-  }
-
-  .details-box {
-    width: 100%;
-    margin-top: 20px;
   }
 }
