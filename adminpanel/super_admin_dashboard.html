@@ -9,12 +9,27 @@
 </head>
 <body>
   <div class="wrapper">
-    <h1>Admin Dashboard</h1>
-    <div id="organization-list">
-      <h2>Organizations</h2>
-      <button id="add-organization-button">Add Organization</button>
-      <ul id="organizations">
-        <!-- List of organizations will be dynamically generated here -->
+    <div class="super-admin-section">
+      <h1>Admin Dashboard</h1>
+      <div id="organization-list">
+        <h2>Organization Users</h2>
+        <button id="add-organization-button">Add Organization</button>
+        <ul id="organizations">
+          <!-- List of organizations will be dynamically generated here -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Organization Admin Details Display -->
+    <div id="organization-details" class="details-box">
+      <button id="close-details" class="close-button">X</button>
+      <h2>Organization Details</h2>
+      <div id="details-content">
+        <!-- Dynamic content will be populated here -->
+      </div>
+      <h3>Organizations Managed:</h3>
+      <ul id="managed-organizations">
+        <!-- List of organizations managed by the admin will be dynamically generated here -->
       </ul>
     </div>
   </div>
@@ -27,8 +42,24 @@
       <form id="organization-form">
         <label for="org-name">Organization Name</label>
         <input type="text" id="org-name" name="org-name" required>
-        <label for="org-description">Description</label>
-        <textarea id="org-description" name="org-description" required></textarea>
+        <label for="org-admin-name">Admin Name</label>
+        <input type="text" id="org-admin-name" name="org-admin-name" required>
+        <label for="org-admin-email">Admin Email</label>
+        <input type="email" id="org-admin-email" name="org-admin-email" required>
+        <label for="org-admin-password">Admin Password</label>
+        <input type="password" id="org-admin-password" name="org-admin-password" required>
+        <label for="org-admin-repeat-password">Repeat Password</label>
+        <input type="password" id="org-admin-repeat-password" name="org-admin-repeat-password" required>
+        <label for="org-admin-gender">Gender</label>
+        <select id="org-admin-gender" name="org-admin-gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="org-admin-address">Address</label>
+        <textarea id="org-admin-address" name="org-admin-address" required></textarea>
+        <label for="org-admin-mobile">Mobile Number (1 mandatory)</label>
+        <input type="tel" id="org-admin-mobile" name="org-admin-mobile" required>
         <button type="submit" id="save-organization-button">Save</button>
       </form>
     </div>

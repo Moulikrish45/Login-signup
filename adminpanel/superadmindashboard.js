@@ -1,93 +1,75 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const organizationList = document.getElementById('organizations');
-    const addOrganizationButton = document.getElementById('add-organization-button');
-    const organizationModal = document.getElementById('organization-modal');
-    const closeButton = document.querySelector('.close-button');
-    const saveOrganizationButton = document.getElementById('save-organization-button');
-    const organizationForm = document.getElementById('organization-form');
-    const modalTitle = document.getElementById('modal-title');
-    
-    let organizations = [];
-    let editIndex = null;
-  
-    // Mock Data for demonstration
-    organizations = [
-      { id: 1, name: 'Organization 1', description: 'Description for Organization 1' },
-      { id: 2, name: 'Organization 2', description: 'Description for Organization 2' }
-    ];
-  
-    // Function to render the list of organizations
-    function renderOrganizations() {
-      organizationList.innerHTML = '';
-      organizations.forEach((org, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <strong>${org.name}</strong>
-          <p>${org.description}</p>
-          <button onclick="editOrganization(${index})">Edit</button>
-          <button onclick="deleteOrganization(${index})">Delete</button>
-        `;
-        organizationList.appendChild(li);
+document.addEventListener('DOMContentLoaded', function () {
+  const organizations = [
+    { id: 1, name: 'Organization 1', adminName: 'John Doe', email: 'johndoe@example.com', gender: 'Male', address: '123 Main St, City, Country', mobile: '0987654321', description: 'Description for Organization 1' },
+    { id: 2, name: 'Organization 2', adminName: 'Jane Doe', email: 'janedoe@example.com', gender: 'Female', address: '456 Elm St, City, Country', mobile: '1234567890', description: 'Description for Organization 2' }
+  ];
+
+  const organizationListElement = document.getElementById('organizations');
+  const detailsBox = document.getElementById('organization-details');
+  const detailsContent = document.getElementById('details-content');
+  const managedOrganizationsElement = document.getElementById('managed-organizations');
+  const closeDetailsButton = document.getElementById('close-details');
+
+  function renderOrganizations() {
+    organizationListElement.innerHTML = '';
+    organizations.forEach(org => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${org.name}</strong> <p>${org.description}</p>`;
+      li.classList.add('organization-item');
+
+      const buttonGroup = document.createElement('div');
+      buttonGroup.classList.add('button-group');
+
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.addEventListener('click', () => {
+        // Handle edit functionality
       });
-    }
-  
-    // Function to open the modal
-    function openModal() {
-      organizationModal.style.display = 'block';
-    }
-  
-    // Function to close the modal
-    function closeModal() {
-      organizationModal.style.display = 'none';
-      organizationForm.reset();
-      editIndex = null;
-    }
-  
-    // Function to handle Add/Edit Organization
-    organizationForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const name = document.getElementById('org-name').value;
-      const description = document.getElementById('org-description').value;
-  
-      if (editIndex === null) {
-        // Add new organization
-        const newOrg = { id: organizations.length + 1, name, description };
-        organizations.push(newOrg);
-      } else {
-        // Edit existing organization
-        organizations[editIndex].name = name;
-        organizations[editIndex].description = description;
-      }
-      
-      closeModal();
-      renderOrganizations();
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        // Handle delete functionality
+      });
+
+      li.addEventListener('click', () => {
+        showDetails(org);
+      });
+
+      buttonGroup.appendChild(editButton);
+      buttonGroup.appendChild(deleteButton);
+      li.appendChild(buttonGroup);
+      organizationListElement.appendChild(li);
     });
-  
-    // Function to edit an organization
-    window.editOrganization = function(index) {
-      editIndex = index;
-      const org = organizations[index];
-      document.getElementById('org-name').value = org.name;
-      document.getElementById('org-description').value = org.description;
-      modalTitle.textContent = 'Edit Organization';
-      openModal();
-    }
-  
-    // Function to delete an organization
-    window.deleteOrganization = function(index) {
-      organizations.splice(index, 1);
-      renderOrganizations();
-    }
-  
-    // Event listeners
-    addOrganizationButton.addEventListener('click', function() {
-      modalTitle.textContent = 'Add Organization';
-      openModal();
+  }
+
+  function showDetails(org) {
+    detailsContent.innerHTML = `
+      <strong>Name:</strong> ${org.name}<br>
+      <strong>Admin Name:</strong> ${org.adminName}<br>
+      <strong>Admin Email:</strong> ${org.email}<br>
+      <strong>Gender:</strong> ${org.gender}<br>
+      <strong>Address:</strong> ${org.address}<br>
+      <strong>Mobile:</strong> ${org.mobile}<br>
+      <strong>Description:</strong> ${org.description}
+    `;
+
+    managedOrganizationsElement.innerHTML = ''; // Clear previous organizations
+
+    // Dummy data for organizations managed by this admin
+    const managedOrgs = ['Sub Organization 1', 'Sub Organization 2'];
+    managedOrgs.forEach(name => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      managedOrganizationsElement.appendChild(li);
     });
-  
-    closeButton.addEventListener('click', closeModal);
-  
-    // Initial render
-    renderOrganizations();
+
+    detailsBox.style.display = 'flex';
+  }
+
+  closeDetailsButton.addEventListener('click', () => {
+    detailsBox.style.display = 'none';
   });
-  
+
+  renderOrganizations();
+});
