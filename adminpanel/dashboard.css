@@ -16,7 +16,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f4f6f9;
+  background-image: url(/background.webp);
   color: var(--text-color);
   line-height: 1.6;
   display: flex;
