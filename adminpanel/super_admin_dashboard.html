@@ -8,31 +8,27 @@
   <script type="text/javascript" src="/adminpanel/superadmindashboard.js" defer></script>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="super-admin-section">
-      <h1>Admin Dashboard</h1>
-      <div id="organization-list">
-        <h2>Organization Users</h2>
-        <button id="add-organization-button">Add Organization</button>
-        <ul id="organizations">
-          <!-- List of organizations will be dynamically generated here -->
-        </ul>
-      </div>
-    </div>
-
-    <!-- Organization Admin Details Display -->
-    <div id="organization-details" class="details-box">
-      <button id="close-details" class="close-button">X</button>
-      <h2>Organization Details</h2>
-      <div id="details-content">
-        <!-- Dynamic content will be populated here -->
-      </div>
-      <h3>Organizations Managed:</h3>
-      <ul id="managed-organizations">
-        <!-- List of organizations managed by the admin will be dynamically generated here -->
-      </ul>
-    </div>
+  <div class="container">
+    
   </div>
+  <header>
+    <h1>Super Admin Dashboard</h1>
+    <button id="add-organization-button">Add Organization</button>
+  </header>
+
+  <main>
+    <section id="organization-list">
+      <h2>Organizations</h2>
+      <div id="fallback-message" style="display: none;">No organizations found. Please add a new organization.</div>
+      <ul id="organizations">
+        <!-- Organizations will be dynamically generated here -->
+      </ul>
+    </section>
+
+    <section id="user-details" class="user-details-container" style="display: none;">
+      <!-- User details will be dynamically shown here when an organization is clicked -->
+    </section>
+  </main>
 
   <!-- Modal for Adding/Editing Organizations -->
   <div id="organization-modal" class="modal">
@@ -64,6 +60,5 @@
       </form>
     </div>
   </div>
-
 </body>
 </html>
