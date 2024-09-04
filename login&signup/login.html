@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="./style.css">
-  <script type="text/javascript" src="/login&signup/login.js" defer></script>
+  <script type="text/javascript" src="./login.js" defer></script>
+
 </head>
 <body>
   <div class="wrapper">
     <h1>Login</h1>
-    <p id="error-message" style="color:red;"></p> <!-- Error message display -->
-    <form id="login-form"> <!-- Changed ID to match the JavaScript code -->
+    <p id="error-message" style="color:red;"></p> 
+    <form id="login-form" onsubmit="handleLogin(event)">
       <div>
         <label for="email-input">
           <span>@</span>

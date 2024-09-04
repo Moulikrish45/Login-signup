@@ -1,4 +1,4 @@
-const form = document.getElementById('form');
+const form = document.getElementById('signup-form');
 const firstname_input = document.getElementById('firstname-input');
 const email_input = document.getElementById('email-input');
 const password_input = document.getElementById('password-input');
@@ -82,4 +82,28 @@ function submitForm(event) {
     //     console.error('Error:', error);
     //     error_message.innerText = 'An error occurred during sign-up. Please try again later.';
     // });
+}
+
+// Function to clear error classes
+function clearErrorClasses() {
+  [firstname_input, email_input, password_input, repeat_password_input].forEach(input => {
+    input.parentElement.classList.remove('incorrect');
+  });
+}
+
+// Function to highlight fields with errors
+function highlightErrors(errors) {
+  if (errors.includes('Firstname is required')) {
+    firstname_input.parentElement.classList.add('incorrect');
+  }
+  if (errors.includes('Email is required')) {
+    email_input.parentElement.classList.add('incorrect');
+  }
+  if (errors.includes('Password is required') || errors.includes('Password must have at least 8 characters')) {
+    password_input.parentElement.classList.add('incorrect');
+  }
+  if (errors.includes('Password does not match repeated password')) {
+    password_input.parentElement.classList.add('incorrect');
+    repeat_password_input.parentElement.classList.add('incorrect');
+  }
 }

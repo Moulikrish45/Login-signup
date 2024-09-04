@@ -4,30 +4,25 @@ const password_input = document.getElementById('password-input');
 const error_message = document.getElementById('error-message');
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent the default form submission
-
-    // Clear previous error messages
+    e.preventDefault(); 
     error_message.innerText = '';
 
-    // Validate the user inputs
     const errors = validateLoginForm(email_input.value, password_input.value);
 
     if (errors.length > 0) {
-        // If there are validation errors, display them to the user
         error_message.innerText = errors.join('. ') + '.';
         return;
     }
 
+    // Prepare the login credentials
     const userEmail = email_input.value.trim();
     const userPassword = password_input.value.trim();
 
-    // Log the JSON data to the console (for debugging purposes)
+    // Debugging log for the login data
     console.log('Login Data as JSON:', JSON.stringify({ useremail: userEmail, password: userPassword }));
 
-    // The API endpoint for login verification
-    const API_ENDPOINT = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/verifyuser';
+    const API_ENDPOINT = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/login?code=R4HrB1_tw_ctYeiGqjNqc6W2RWRPMkQP8UNsv3M365soAzFuyMEi7A%3D%3D';
 
-    // Make a POST request to the API with the email and password in the request body
     fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -36,20 +31,18 @@ loginForm.addEventListener('submit', (e) => {
         body: JSON.stringify({ useremail: userEmail, password: userPassword }),
     })
     .then(response => {
-        console.log('Raw response:', response);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json().catch(error => {
+        return response.json().catch(() => {
             throw new Error('Failed to parse JSON');
         });
     })
     .then(data => {
-        console.log('Success:', data);
         if (data.status === "verified") {
-            alert(`Login successful! Role: ${data.role}`);
-            // Redirect to the appropriate dashboard based on role
-            window.location.href = '/super_admin_dashboard.html';
+            setSessionToken(data.token);
+            alert(`Login Successful! Role: ${data.role}`);
+            redirectToDashboard(data.role);
         } else {
             throw new Error('Login failed: ' + data.status);
         }
@@ -60,7 +53,6 @@ loginForm.addEventListener('submit', (e) => {
     });
 });
 
-// Function to validate the login form inputs
 function validateLoginForm(email, password) {
     let errors = [];
 
@@ -79,8 +71,77 @@ function validateLoginForm(email, password) {
     return errors;
 }
 
-// Function to validate the email format using a regular expression
 function validateEmailFormat(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
+
+function setSessionToken(token) {
+    const expiryDate = new Date();
+    expiryDate.setHours(expiryDate.getHours() + 1); // Token expires in 1 hour
+
+    document.cookie = `sessionToken=${token}; Secure; SameSite=Strict; Expires=${expiryDate.toUTCString()};`;
+}
+
+function getSessionToken() {
+    const name = "sessionToken=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookies = decodedCookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return "";
+}
+
+// Function to redirect user to the appropriate dashboard based on their role
+function redirectToDashboard(role) {
+    switch(role) {
+        // case 'PC Admin':
+        //     window.location.href = '/pc_admin_dashboard.html';
+        //     break;
+        case 'Super Admin':
+            window.location.href = '/super_admin_dashboard.html';
+            break;
+        // Waiting for other roles and their corresponding dashboards here
+        default:
+            window.location.href = '/default_dashboard.html';
+    }
+}
+
+// Function to make an authenticated request using the session token
+function makeAuthenticatedRequest(url, method = 'GET') {
+    const token = getSessionToken();
+    if (!token) {
+        alert('Session expired. Please log in again.');
+        window.location.href = '/login.html'; // Redirect to login if no token
+        return;
+    }
+
+    return fetch(url, {
+        method: method,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+// Example function to test secure endpoint access
+function testSecureEndpoint() {
+    const secureUrl = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/secure-endpoint?code=HBk6IFqkaFNRxbu2zbj-RG-SnGYnRBR3HlQR9meFYQwiAzFugyY7NQ%3D%3D';
+    makeAuthenticatedRequest(secureUrl)
+        .then(response => response.text())
+        .then(data => console.log('Secure endpoint response:', data))
+        .catch(error => console.error('Error accessing secure endpoint:', error));
+}
+
+// Call the test function on page load to ensure the session is valid
+document.addEventListener('DOMContentLoaded', () => {
+    if (getSessionToken()) {
+        testSecureEndpoint();
+    }
+});
