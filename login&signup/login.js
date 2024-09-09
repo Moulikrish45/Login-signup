@@ -80,7 +80,7 @@ function setSessionToken(token) {
     const expiryDate = new Date();
     expiryDate.setHours(expiryDate.getHours() + 1); // Token expires in 1 hour
 
-    document.cookie = `sessionToken=${token}; Secure; SameSite=Strict; Expires=${expiryDate.toUTCString()};`;
+    document.cookie = `sessionToken=${token}; Secure; SameSite=Secure;Path=/; Expires=${expiryDate.toUTCString()};`;
 }
 
 function getSessionToken() {
@@ -104,7 +104,7 @@ function redirectToDashboard(role) {
         //     window.location.href = '/pc_admin_dashboard.html';
         //     break;
         case 'Super Admin':
-            window.location.href = '/super_admin_dashboard.html';
+            window.location.href = '/adminpanel/super_admin_dashboard.html';
             break;
         // Waiting for other roles and their corresponding dashboards here
         default:
