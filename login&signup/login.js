@@ -104,7 +104,7 @@ function redirectToDashboard(role) {
         //     window.location.href = '/pc_admin_dashboard.html';
         //     break;
         case 'Super Admin':
-            window.location.href = '/adminpanel/super_admin_dashboard.html';
+            window.location.href = '/superadminpanel/super_admin_dashboard.html';
             break;
         // Waiting for other roles and their corresponding dashboards here
         default:
