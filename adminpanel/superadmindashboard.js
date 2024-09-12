@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function showUserDetails(admin) {
     userDetailsContainer.innerHTML = `
       <div class="user-details-header">
-        <img src="https://via.placeholder.com/80" alt="${admin.name}">
         <h3>${admin.name}<br><small>${admin.email}</small></h3>
       </div>
       <div class="user-details-body">
