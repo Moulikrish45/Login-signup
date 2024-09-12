@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Admin Dashboard</title>
+  <link rel="stylesheet" href="siteadmindashboard.css">
+  <script type="text/javascript" src="siteadmindashboard.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Site Admin Dashboard</h1>
+      <button id="add-pc-button">Add PC</button>
+    </header>
+
+    <main>
+      <section id="pc-list">
+        <h2>PCs</h2>
+        <div id="fallback-message" style="display: none;">No PCs found. Please add a new PC.</div>
+        <ul id="pcs">
+          <!-- PCs will be dynamically generated here -->
+        </ul>
+      </section>
+
+      <section id="pc-details" class="pc-details-container" style="display: none;">
+        <!-- PC details will be dynamically shown here when a PC is clicked -->
+      </section>
+    </main>
+    
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    
+    <!-- Modal for Adding PCs -->
+    <div id="pc-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-title">Add PC</h2>
+        <form id="pc-form">
+          <label for="pc-name">PC Name</label>
+          <input type="text" id="pc-name" name="pc-name" required>
+          <label for="pc-type">PC Type</label>
+          <input type="text" id="pc-type" name="pc-type" required>
+          <label for="pc-location">Location</label>
+          <input type="text" id="pc-location" name="pc-location" required>
+          <label for="pc-admin-email">Admin Email</label>
+          <input type="email" id="pc-admin-email" name="pc-admin-email" required>
+          <button type="submit" id="save-pc-button">Save</button>
+        </form>
+        <div id="qr-scanner" style="display: none;">
+          <!-- QR Scanner will be initialized here -->
+          <video id="qr-video" width="100%" height="100%"></video>
+          <button id="stop-scanner">Stop Scanner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
