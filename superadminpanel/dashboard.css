@@ -78,7 +78,13 @@ main {
   background-color: var(--base-color);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#organization-list::-webkit-scrollbar{
+  display: none;
 }
 
 #organization-list h2 {

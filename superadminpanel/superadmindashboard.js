@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getorganizations?';
+  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=RNqEbinzwcqGRnHlgTdFrOWhhwe2q7OVZ5HeB5kN9cgMAzFurgLtbA%3D%3D';
   const API_CREATE_USER = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/createuser?';
 
-  const organizations = [
-    // Initial organizations for development/testing purposes
-    { id: 1, name: 'Organization 1', AliasName: 'Alias Name Org 1', admin: { name: 'John Doe', email: 'johndoe@example.com', phone: '408-996-1010', managedOrganizations: ['Sub Organization 1', 'Sub Organization 2'] } },
-    { id: 2, name: 'Organization 2', AliasName: 'Alias Name Org 2', admin: { name: 'Jane Doe', email: 'janedoe@example.com', phone: '408-996-1011', managedOrganizations: ['Sub Organization A', 'Sub Organization B'] } }
-  ];
+  let organizations = []; // Start with an empty array for dynamic updates
 
   const organizationListElement = document.getElementById('organizations');
   const fallbackMessage = document.getElementById('fallback-message');
@@ -29,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const li = document.createElement('li');
         li.classList.add('organization-item');
         li.innerHTML = `
-          <span class="organization-name">${org.name}</span>
-          <span class="organization-description">${org.AliasName}</span>
+          <span class="organization-name">${org.user_name}</span>
+          <span class="organization-description">${org.user_email}</span>
           <div class="organization-actions">
             <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
@@ -42,48 +38,45 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         li.querySelector('.delete-button').addEventListener('click', (e) => {
           e.stopPropagation();
-          deleteOrganization(org.id);
+          deleteOrganization(org.user_id);
         });
-        li.addEventListener('click', () => showUserDetails(org.admin));
+        li.addEventListener('click', () => showUserDetails(org));
         organizationListElement.appendChild(li);
       });
     }
   }
 
   function showUserDetails(admin) {
-    const managedOrgs = Array.isArray(admin.managedOrganizations) ? admin.managedOrganizations : [];
-  
     userDetailsContainer.innerHTML = `
       <div class="user-details-header">
-        <h3>${admin.name}<br><small>${admin.email}</small></h3>
+        <h3>${admin.user_name}<br><small>${admin.user_email}</small></h3>
       </div>
       <div class="user-details-body">
         <div class="column">
           <label>Phone Number:</label>
-          <p>${admin.phone}</p>
+          <p>${admin.user_mobile_1}</p>
+        </div>
+        <div class="column">
+          <label>Address:</label>
+          <p>${admin.user_address}</p>
         </div>
       </div>
-      <h3>Managed Organizations:</h3>
-      <ul id="managed-organizations">
-        ${managedOrgs.map(org => `<li>${org}</li>`).join('')}
-      </ul>
     `;
     userDetailsContainer.style.display = 'block';
   }
 
   function openEditOrganizationModal(org) {
-    editingOrgId = org.id;
+    editingOrgId = org.user_id;
     document.getElementById('modal-title').textContent = 'Edit Organization';
-    organizationForm['org-name'].value = org.name;
-    organizationForm['org-admin-name'].value = org.admin.name;
-    organizationForm['org-admin-email'].value = org.admin.email;
+    organizationForm['org-name'].value = org.user_name;
+    organizationForm['org-admin-name'].value = org.user_name;
+    organizationForm['org-admin-email'].value = org.user_email;
     organizationForm['org-admin-password'].value = ''; // Leave empty for security reasons
     organizationForm['org-admin-repeat-password'].value = ''; // Leave empty for security reasons
-    const gender = org.admin.gender ? org.admin.gender.toLowerCase() : 'other';
-    organizationForm['org-admin-gender'].value = gender;
-    organizationForm['org-admin-address'].value = org.admin.address || ''; // Default to empty string if not defined
-    organizationForm['org-admin-mobile'].value = org.admin.phone || ''; // Default to empty string if not defined
-    
+    organizationForm['org-admin-gender'].value = org.user_gender || 'other';
+    organizationForm['org-admin-address'].value = org.user_address || ''; // Default to empty string if not defined
+    organizationForm['org-admin-mobile'].value = org.user_mobile_1 || ''; // Default to empty string if not defined
+
     // Show overlay and blur background
     if (modalOverlay) {
       modalOverlay.classList.add('modal-show');
@@ -128,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function deleteOrganization(orgId) {
-    const updatedOrganizations = organizations.filter(org => org.id !== orgId);
+    const updatedOrganizations = organizations.filter(org => org.user_id !== orgId);
     
     organizations.length = 0; // Clear the original array
     organizations.push(...updatedOrganizations); // Push the filtered organizations back
@@ -140,20 +133,16 @@ document.addEventListener('DOMContentLoaded', function () {
   organizationForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const newOrg = {
-      id: editingOrgId || Date.now(),
-      name: organizationForm['org-name'].value,
-      AliasName: organizationForm['org-admin-name'].value, // Adjusted according to admin's name
-      admin: {
-        name: organizationForm['org-admin-name'].value,
-        email: organizationForm['org-admin-email'].value,
-        phone: organizationForm['org-admin-mobile'].value,
-        gender: organizationForm['org-admin-gender'].value,
-        address: organizationForm['org-admin-address'].value
-      }
+      user_id: editingOrgId || Date.now(),
+      user_name: organizationForm['org-name'].value,
+      user_email: organizationForm['org-admin-email'].value,
+      user_mobile_1: organizationForm['org-admin-mobile'].value,
+      user_gender: organizationForm['org-admin-gender'].value,
+      user_address: organizationForm['org-admin-address'].value
     };
 
     if (editingOrgId) {
-      const index = organizations.findIndex(org => org.id === editingOrgId);
+      const index = organizations.findIndex(org => org.user_id === editingOrgId);
       organizations[index] = newOrg;
     } else {
       organizations.push(newOrg);
@@ -176,12 +165,18 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    // Prepare request body
+    const requestBody = {
+      userrole: 'Admin'
+    };
+
     fetch(API_GET_ORGANIZATIONS, {
-      method: 'GET',
+      method: 'POST', // Using POST method
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify(requestBody)
     })
     .then(response => {
       if (!response.ok) {
@@ -190,9 +185,9 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.json();
     })
     .then(data => {
-      if (Array.isArray(data.organizations)) {
+      if (Array.isArray(data)) {
         organizations.length = 0; // Clear the array
-        organizations.push(...data.organizations); // Populate it with new data
+        organizations.push(...data); // Populate it with new data
         renderOrganizations();
       } else {
         console.error('Unexpected response format:', data);
@@ -215,14 +210,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const requestBody = {
-      useremail: org.admin.email,
+      useremail: org.user_email,
       password: organizationForm['org-admin-password'].value, // Use the password from the form
       userrole: 'Admin',
-      address: org.admin.address,
-      adminName: org.admin.name,
-      organizationName: org.name,
-      mobileNumber: org.admin.phone,
-      gender: org.admin.gender
+      address: org.user_address,
+      adminName: org.user_name,
+      organizationName: org.user_name,
+      mobileNumber: org.user_mobile_1,
+      gender: org.user_gender
     };
 
     fetch(API_CREATE_USER, {
@@ -264,5 +259,5 @@ document.addEventListener('DOMContentLoaded', function () {
     return "";
   }
 
-  renderOrganizations(); // Initial render on page load
+  renderOrganizations(); // Initial render on page
 });
