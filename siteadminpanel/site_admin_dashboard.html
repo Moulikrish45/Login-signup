@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site Admin Dashboard</title>
-  <link rel="stylesheet" href="siteadmindashboard.css">
-  <script type="text/javascript" src="siteadmindashboard.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Admin Dashboard</title>
+    <link rel="stylesheet" href="siteadmindashboard.css">
+    <script type="text/javascript" src="siteadmindashboard.js" defer></script>
+    <!-- Include QR Scanner library -->
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
 </head>
-
 <body>
-  <div class="container">
+    <div class="container">
+    </div>
     <header>
-      <h1>Site Admin Dashboard</h1>
-      <button id="add-pc-button">Add PC</button>
+        <h1>Site Admin Dashboard</h1>
+        <button id="add-organization-button">Add Pc's</button>
     </header>
-
     <main>
-      <section id="pc-list">
-        <h2>PCs</h2>
-        <div id="fallback-message" style="display: none;">No PCs found. Please add a new PC.</div>
-        <ul id="pcs">
-          <!-- PCs will be dynamically generated here -->
-        </ul>
-      </section>
-
-      <section id="pc-details" class="pc-details-container" style="display: none;">
-        <!-- PC details will be dynamically shown here when a PC is clicked -->
-      </section>
+        <section id="organization-list">
+            <h2>PC'S Present</h2>
+            <div id="fallback-message" style="display: none;">No PC found. Please add a new PC.</div>
+            <ul id="organizations">
+                <!-- Organizations will be dynamically generated here -->
+            </ul>
+        </section>
+        <section id="user-details" class="user-details-container" style="display: none;">
+            <!-- User details will be dynamically shown here when an organization is clicked -->
+        </section>
     </main>
 
     <!-- Modal Overlay -->
     <div id="modal-overlay" class="modal-overlay"></div>
 
-    <!-- Modal for Adding PCs -->
-    <div id="pc-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="modal-title">Add PC</h2>
-        <form id="pc-form">
-          <label for="pc-name">PC Name</label>
-          <input type="text" id="pc-name" name="pc-name" required>
-          <label for="pc-type">PC Type</label>
-          <input type="text" id="pc-type" name="pc-type" required>
-          <label for="pc-location">Location</label>
-          <input type="text" id="pc-location" name="pc-location" required>
-          <label for="pc-admin-email">Admin Email</label>
-          <input type="email" id="pc-admin-email" name="pc-admin-email" required>
-          <button type="submit" id="save-pc-button">Save</button>
-        </form>
-        <div id="qr-scanner" style="display: none;">
-          <!-- QR Scanner will be initialized here -->
-          <video id="qr-video" width="100%" height="100%"></video>
-          <button id="stop-scanner">Stop Scanner</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
+    <!-- Modal for Adding/Editing Organizations -->
+    <div id="organization-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title">Add PC</h2>
+            <form id="organization-form">
+                <label for="org-name">User Id</label>
+                <input type="text" id="org-name" name="org-name" required>
+                <label for="org-admin-name">PC's ID or PC's Name</label>
+                <input type="text" id="org-admin-name" name="org-admin-name" required>
+                <label for="org-admin-email">Pc-Admin Email</label>
+                <input type="email" id="org-admin-email" name="org-admin-email" required>
+                <label for="org-admin-password">PC's Password</label>
+                <input type="password" id="org-admin-password" name="org-admin-password" required>
+                <label for="org-admin-repeat-password">Repeat Password</label>
+                <input type="password" id="org-admin-repeat-password" name="org-admin-repeat-password" required>
+                <label for="org-admin-address">Department or Site Address</label>
+                <textarea id="org-admin-address" name="org-admin-address" required></textarea>
+                <label for="org-admin-mobile">Mobile Number (PC Admin)</label>
+                <input type="tel" id="org-admin-mobile" name="org-admin-mobile" required>
+                <button type="submit" id="save-organization-button">Save</button>
+            </form>
 
+            <!-- QR Scanner Section -->
+            <div id="qr-scanner-container" style="display: none;">
+                <h3>Scan QR Code</h3>
+                <div id="qr-reader" style="width: 300px;"></div>
+                <button id="stop-qr-scan-button">Stop Scanning</button>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

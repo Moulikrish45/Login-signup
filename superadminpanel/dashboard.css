@@ -301,6 +301,47 @@ main {
   display: none;
 }
 
+#loading-container {
+  text-align: center; /* Center the loading animation */
+  margin: 20px 0; /* Margin around the loading container */
+}
+
+/* CSS for alert overlay */
+#alert-overlay {
+  display: none; /* Hide by default */
+  position: fixed; /* Fixed position */
+  top: 0; left: 0; right: 0; bottom: 0; /* Full viewport coverage */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it's on top of other content */
+  align-items: center; /* Center modal vertically */
+  justify-content: center; /* Center modal horizontally */
+}
+
+/* CSS for alert modal */
+.alert-modal {
+  background: #fff; /* White background for the alert modal */
+  padding: 20px; /* Padding inside the modal */
+  border-radius: 8px; /* Rounded corners */
+  width: 300px; /* Fixed width for larger screens */
+  max-width: 90%; /* Responsive max width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  text-align: center; /* Center text */
+  position: relative; /* Position relative for close button */
+}
+
+.alert-modal p {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  font-size: 16px; /* Font size for the alert message */
+}
+
+.alert-modal .close-button {
+  position: absolute; /* Absolute positioning for close button */
+  top: 10px; right: 10px; /* Position it at the top-right corner */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 20px; /* Font size for the close button */
+}
+
 .modal input,
 .modal select,
 .modal textarea {
@@ -382,6 +423,14 @@ main {
     width: 100%;
     margin-bottom: 20px;
   }
+  
+  .alert-modal {
+    width: 80%; /* Use more of the viewport width on smaller screens */
+  }
+
+  #loading-container {
+    margin: 10px 0; /* Adjust margin for smaller screens */
+  }
 }
 
 @media (max-width: 480px) {
@@ -397,6 +446,19 @@ main {
 
   #add-organization-button {
     width: 100%;
+  }
+
+  .alert-modal {
+    width: 90%; /* Adjust modal width for small screens */
+    padding: 15px; /* Reduced padding for small screens */
+  }
+  
+  .alert-modal p {
+    font-size: 14px; /* Smaller font size for small screens */
+  }
+
+  .alert-modal .close-button {
+    font-size: 18px; /* Smaller font size for the close button */
   }
 }
 

@@ -24,11 +24,14 @@ body {
   min-height: 100vh;
   align-items: center;
   overflow-y: auto;
+  /* Ensures body is scrollable */
 }
+
 
 body::-webkit-scrollbar {
   display: none;
 }
+
 header {
   width: 100%;
   max-width: 1200px;
@@ -47,7 +50,7 @@ h1 {
   font-weight: 600;
 }
 
-#add-pc-button {
+#add-organization-button {
   background-color: var(--accent-color);
   color: var(--base-color);
   padding: 10px 20px;
@@ -58,7 +61,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-#add-pc-button:hover {
+#add-organization-button:hover {
   background-color: var(--text-color);
 }
 
@@ -71,16 +74,22 @@ main {
   gap: 20px;
 }
 
-#pc-list {
+#organization-list {
   flex: 1;
   padding: 20px;
   background-color: var(--base-color);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-#pc-list h2 {
+#organization-list::-webkit-scrollbar {
+  display: none;
+}
+
+#organization-list h2 {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 20px;
@@ -92,13 +101,13 @@ main {
   text-align: center;
 }
 
-#pcs {
+#organizations {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#pcs li {
+#organizations li {
   background-color: var(--input-color);
   padding: 15px;
   border-radius: 5px;
@@ -108,12 +117,12 @@ main {
   align-items: center;
 }
 
-.pc-item:hover {
+.organization-item:hover {
   background-color: #e0e4f2;
   cursor: pointer;
 }
 
-.pc-actions button {
+.organization-actions button {
   background-color: var(--accent-color);
   color: var(--base-color);
   padding: 5px 10px;
@@ -124,54 +133,54 @@ main {
   transition: background-color 0.3s ease;
 }
 
-.pc-actions button:hover {
+.organization-actions button:hover {
   background-color: var(--text-color);
 }
 
-.pc-details-container {
+.user-details-container {
   flex: 1;
   padding: 20px;
   background-color: var(--base-color);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
 }
 
-.pc-details-header img {
+.user-details-header img {
   border-radius: 50%;
   margin-bottom: 20px;
 }
 
-.pc-details-header h3 {
+.user-details-header h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.pc-details-header small {
+.user-details-header small {
   font-size: 1rem;
   color: #777;
 }
 
-.pc-details-body {
+.user-details-body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.pc-details-body .column {
+.user-details-body .column {
   flex: 1;
 }
 
-#managed-pcs {
+#managed-organizations {
   list-style: none;
   padding: 0;
   margin: 20px 0 0 0;
-  max-height: 100px; /* Adjust height */
+  max-height: 100px;
+  /* Adjust height */
   overflow-y: auto;
 }
 
-#managed-pcs li {
+#managed-organizations li {
   background-color: var(--input-color);
   padding: 10px;
   border-radius: 5px;
@@ -179,16 +188,21 @@ main {
 }
 
 /* Hide scrollbar, but allow scrolling */
-#managed-pcs::-webkit-scrollbar {
+#managed-organizations::-webkit-scrollbar {
   display: none;
 }
 
-#managed-pcs {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+#main-content.blur-background {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
 }
 
-/* Existing styles remain unchanged */
+#managed-organizations {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
 
 .modal {
   display: none;
@@ -201,12 +215,14 @@ main {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  width: calc(100% - 40px); /* Full width minus padding on sides */
-  max-width: 600px;
+  width: 90%;
+  max-width: 500px;
   max-height: 80%;
+  /* Ensure the modal does not take up the whole height */
   overflow: auto;
-  margin: 0 20px; /* Small space on left and right */
+  /* Allow scrolling if content exceeds height */
 }
+
 
 .modal-content {
   padding: 20px;
@@ -241,12 +257,16 @@ main {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  /* Dimmed background */
   z-index: 1000;
+  /* Ensure overlay is above other elements */
   display: none;
+  /* Initially hidden */
 }
 
 .modal-overlay {
   display: none;
+  /* Initially hidden */
   position: fixed;
   top: 0;
   left: 0;
@@ -254,21 +274,119 @@ main {
   height: 100%;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.7);
+  /* Semi-transparent background */
   backdrop-filter: blur(5px);
+  /* Blur effect */
   z-index: 1000;
+  /* Ensure it is below the modal but above other content */
 }
+
 
 .modal-show .modal-overlay {
   display: block;
+  /* Show the overlay when the modal is visible */
 }
 
 .modal-show .modal {
   display: block;
+  /* Ensure the modal is visible when the overlay is visible */
 }
 
 .modal h2 {
   font-size: 1.5rem;
   margin-bottom: 20px;
+}
+
+#organization-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  /* Allows scrolling if content overflows */
+  z-index: 1000;
+  /* Ensure it's above the overlay */
+  display: none;
+  /* Hidden by default */
+}
+
+#organization-modal::-webkit-scrollbar {
+  display: none;
+}
+
+#loading-container {
+  text-align: center;
+  /* Center the loading animation */
+  margin: 20px 0;
+  /* Margin around the loading container */
+}
+
+/* CSS for alert overlay */
+#alert-overlay {
+  display: none;
+  /* Hide by default */
+  position: fixed;
+  /* Fixed position */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Full viewport coverage */
+  background: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  z-index: 1000;
+  /* Ensure it's on top of other content */
+  align-items: center;
+  /* Center modal vertically */
+  justify-content: center;
+  /* Center modal horizontally */
+}
+
+/* CSS for alert modal */
+.alert-modal {
+  background: #fff;
+  /* White background for the alert modal */
+  padding: 20px;
+  /* Padding inside the modal */
+  border-radius: 8px;
+  /* Rounded corners */
+  width: 300px;
+  /* Fixed width for larger screens */
+  max-width: 90%;
+  /* Responsive max width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Shadow effect */
+  text-align: center;
+  /* Center text */
+  position: relative;
+  /* Position relative for close button */
+}
+
+.alert-modal p {
+  margin: 0;
+  /* Remove default margin */
+  padding: 0;
+  /* Remove default padding */
+  font-size: 16px;
+  /* Font size for the alert message */
+}
+
+.alert-modal .close-button {
+  position: absolute;
+  /* Absolute positioning for close button */
+  top: 10px;
+  right: 10px;
+  /* Position it at the top-right corner */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  font-size: 20px;
+  /* Font size for the close button */
 }
 
 .modal input,
@@ -279,6 +397,10 @@ main {
   margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid #ddd;
+}
+
+#modal-overlay.modal-show {
+  display: block;
 }
 
 .modal button {
@@ -296,18 +418,143 @@ main {
   background-color: var(--text-color);
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .modal {
-    width: calc(100% - 20px); /* Adjust width for smaller screens */
-    margin: 0 10px; /* Adjust margin for smaller screens */
-  }
+.user-details-container {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--base-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 60vh;
+  /* Adjust height */
+}
+
+#managed-organizations {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  max-height: 100px;
+  /* Adjust height */
+  overflow-y: auto;
+}
+
+/* Hide scrollbar, but allow scrolling */
+#managed-organizations::-webkit-scrollbar {
+  display: none;
+}
+
+#managed-organizations {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* QR Scanner Container Styling */
+/* QR Scanner Container Styling */
+#qr-scanner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff; /* White background for the scanner */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Ensure it appears above other content */
+  padding: 20px;
+  display: none; /* Initially hidden */
+}
+
+/* QR Reader Box */
+#qr-reader {
+  width: 100%;
+  height: 300px; /* Adjust height as needed */
+  border: 2px solid #ddd; /* Light border for the scanner */
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Stop Scanning Button */
+#stop-qr-scan-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Blue background for button */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#stop-qr-scan-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* QR Data Preview Styling */
+#qr-data-preview {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 20px;
+  text-align: center;
+}
+
+#qr-data-preview pre {
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#qr-data-preview button {
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#qr-data-preview #confirm-data-button {
+  background-color: #28a745; /* Green background for confirm button */
+  color: #ffffff;
+}
+
+#qr-data-preview #confirm-data-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+#qr-data-preview #cancel-data-button {
+  background-color: #dc3545; /* Red background for cancel button */
+  color: #ffffff;
+}
+
+#qr-data-preview #cancel-data-button:hover {
+  background-color: #c82333; /* Darker red on hover */
 }
 
 
-.blur-background {
-  filter: blur(5px);
+/* Modal Overlay for QR Scanner */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black background */
+  display: none;
+  /* Initially hidden */
+  z-index: 1000;
+  /* Ensure it appears below the QR scanner but above other content */
 }
+
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -318,17 +565,30 @@ main {
   header {
     flex-direction: column;
     gap: 10px;
-    justify-content: flex-start;
-    width: 80%;
   }
 
-  #pc-list {
+  .user-details-container {
+    order: 2;
     margin: 0 10px;
   }
 
-  #add-pc-button {
+  #organization-list {
+    margin: 0 10px;
+  }
+
+  #add-organization-button {
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  .alert-modal {
+    width: 80%;
+    /* Use more of the viewport width on smaller screens */
+  }
+
+  #loading-container {
+    margin: 10px 0;
+    /* Adjust margin for smaller screens */
   }
 }
 
@@ -338,12 +598,35 @@ main {
     padding: 10px;
   }
 
-  #pc-list {
+  .user-details-container,
+  #organization-list {
     margin: 0 10px;
   }
 
-  #add-pc-button {
+  #add-organization-button {
     width: 100%;
+  }
+
+  .alert-modal {
+    width: 90%;
+    /* Adjust modal width for small screens */
+    padding: 15px;
+    /* Reduced padding for small screens */
+  }
+
+  .alert-modal p {
+    font-size: 14px;
+    /* Smaller font size for small screens */
+  }
+
+  .alert-modal .close-button {
+    font-size: 18px;
+    /* Smaller font size for the close button */
   }
 }
 
+@media screen and (max-width: 768px) {
+  .organization-description {
+    display: none;
+  }
+}
