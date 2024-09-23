@@ -100,7 +100,7 @@ function getSessionToken() {
 // Function to redirect user to the appropriate dashboard based on their role
 function redirectToDashboard(role) {
     switch(role) {
-        case 'Admin':
+        case 'Organizational Admin':
             window.location.href = '/adminpanel/admin_panel_dashboard.html';
             break;
         case 'Site Admin':
@@ -109,6 +109,10 @@ function redirectToDashboard(role) {
         case 'Super Admin':
             window.location.href = '/superadminpanel/super_admin_dashboard.html';
             break;
+        case 'Admin':
+            window.location.href = '/organizationadminpanel/organization_admin_dashboard.html';
+            break;
+
         // Waiting for other roles and their corresponding dashboards here
         default:
             window.location.href = '/Not_Found_Error_404.html';
