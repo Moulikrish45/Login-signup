@@ -14,12 +14,12 @@
     </div>
     <header>
         <h1>Site Admin Dashboard</h1>
-        <button id="add-organization-button">Add Pc's</button>
+        <button id="add-organization-button">Add Pc Admin</button>
     </header>
     <main>
         <section id="organization-list">
-            <h2>PC'S Present</h2>
-            <div id="fallback-message" style="display: none;">No PC found. Please add a new PC.</div>
+            <h2>PC Admin's Present</h2>
+            <div id="fallback-message" style="display: none;">No PC Admin found.</div>
             <ul id="organizations">
                 <!-- Organizations will be dynamically generated here -->
             </ul>
@@ -36,19 +36,19 @@
     <div id="organization-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2 id="modal-title">Add PC</h2>
+            <h2 id="modal-title">Add PC Admin</h2>
             <form id="organization-form">
                 <label for="org-name">User Id</label>
                 <input type="text" id="org-name" name="org-name" required>
-                <label for="org-admin-name">PC's ID or PC's Name</label>
+                <label for="org-admin-name">PC Admin</label>
                 <input type="text" id="org-admin-name" name="org-admin-name" required>
                 <label for="org-admin-email">Pc-Admin Email</label>
                 <input type="email" id="org-admin-email" name="org-admin-email" required>
-                <label for="org-admin-password">PC's Password</label>
+                <label for="org-admin-password">PC Admin Password</label>
                 <input type="password" id="org-admin-password" name="org-admin-password" required>
                 <label for="org-admin-repeat-password">Repeat Password</label>
                 <input type="password" id="org-admin-repeat-password" name="org-admin-repeat-password" required>
-                <label for="org-admin-address">Department or Site Address</label>
+                <label for="org-admin-address">Department of PC Admin</label>
                 <textarea id="org-admin-address" name="org-admin-address" required></textarea>
                 <label for="org-admin-mobile">Mobile Number (PC Admin)</label>
                 <input type="tel" id="org-admin-mobile" name="org-admin-mobile" required>

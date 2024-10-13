@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Prepare request body
     const requestBody = {
-      userrole: 'Admin'
+      userrole: 'Site Admin'
     };
 
     fetch(API_GET_ORGANIZATIONS, {
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const requestBody = {
       useremail: org.user_email,
       password: organizationForm['org-admin-password'].value, // Use the password from the form
-      userrole: 'Admin',
+      userrole: 'Site Admin',
       address: org.user_address,
       adminName: org.user_name,
       organizationName: org.user_name,

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=RNqEbinzwcqGRnHlgTdFrOWhhwe2q7OVZ5HeB5kN9cgMAzFurgLtbA%3D%3D';
+    const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=RNqEbinzwcqGRnHlgTdFrOWhhwe2q7OVZ5HeB5kN9cgMAzFurgLtbA%3D%3D  ';
     const API_CREATE_USER = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/createuser?';
   
     let organizations = [];
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const requestBody = {
         useremail: org.user_email,
         password: organizationForm['org-admin-password'].value, // Use the password from the form
-        userrole: 'Admin',
+        userrole: 'Site Admin',
         address: org.user_address,
         adminName: org.user_name,
         organizationName: org.user_name,

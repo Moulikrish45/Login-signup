@@ -21,8 +21,7 @@ loginForm.addEventListener('submit', (e) => {
     // Debugging log for the login data
     console.log('Login Data as JSON:', JSON.stringify({ useremail: userEmail, password: userPassword }));
 
-    const API_ENDPOINT = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/login?code=R4HrB1_tw_ctYeiGqjNqc6W2RWRPMkQP8UNsv3M365soAzFuyMEi7A%3D%3D';
-
+    const API_ENDPOINT = "https://mdashttptriggersfunctionapp.azurewebsites.net/api/login?code=6hFGwVi9hKu225MkC1AIoeyEbrSxKtvNFSP1CC6Z9R_8AzFukajfwg%3D%3D"
     fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -100,18 +99,20 @@ function getSessionToken() {
 // Function to redirect user to the appropriate dashboard based on their role
 function redirectToDashboard(role) {
     switch(role) {
-        case 'Organizational Admin':
+        case 'Owner':
             window.location.href = '/adminpanel/admin_panel_dashboard.html';
             break;
         case 'Site Admin':
-            window.location.href = '/adminpanel/site_admin_dashboard.html';
+            window.location.href = '/siteadminpanel/site_admin_dashboard.html';
             break;
         case 'Super Admin':
             window.location.href = '/superadminpanel/super_admin_dashboard.html';
             break;
-        case 'Admin':
+        case 'Organizational Admin':
             window.location.href = '/organizationadminpanel/organization_admin_dashboard.html';
             break;
+        case 'PC Admin':
+            window.location.href = '/pcadminpanel/pc_admin_dashboard.html';
 
         // Waiting for other roles and their corresponding dashboards here
         default:

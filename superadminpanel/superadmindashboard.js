@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=RNqEbinzwcqGRnHlgTdFrOWhhwe2q7OVZ5HeB5kN9cgMAzFurgLtbA%3D%3D';
+  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?';
   const API_CREATE_USER = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/createuser?';
 
   let organizations = []; // Start with an empty array for dynamic updates
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
       mainContent.classList.add('blur-background');
     }
   }
-  
+
   function closeModal() {
     if (modalOverlay) {
       modalOverlay.classList.remove('modal-show'); // Hide the overlay

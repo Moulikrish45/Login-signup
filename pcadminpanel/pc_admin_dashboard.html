@@ -4,66 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Super Admin Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
-  <script type="text/javascript" src="superadmindashboard.js" defer></script>
+  <link rel="stylesheet" href="pcadmindashboard.css">
+  <script type="text/javascript" src="pcadmindashboard.js" defer></script>
 </head>
 <body>
   <div class="container">
   </div>
   <header>
-    <h1>Super Admin Dashboard</h1>
-    <button id="add-organization-button">Add Organization</button>
+    <h1>Admin Dashboard</h1>
+    <button id="add-organization-button">Add PC</button>
   </header>
 
   <main>
     <section id="organization-list">
       <h2>Organizations</h2>
-      <div id="fallback-message" style="display: none;">No organizations found. Please add a new organization.</div>
+      <div id="fallback-message" style="display: none;">No PC's found. Please add a new PC.</div>
       <ul id="organizations">
         <!-- Organizations will be dynamically generated here -->
       </ul>
     </section>
 
     <section id="user-details" class="user-details-container" style="display: none;">
-      <!-- User details will be dynamically shown here when an organization is clicked -->
     </section>
   </main>
-
+  
   <!-- Modal Overlay -->
   <div id="modal-overlay" class="modal-overlay"></div>
   
-  <!-- Modal for Adding/Editing Organizations -->
   <div id="organization-modal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
-      <h2 id="modal-title">Add Organization</h2>
+      <h2 id="modal-title">Add PC</h2>
       <form id="organization-form">
-        <label for="org-name">Organization Name</label>
-        <input type="text" id="org-name" name="org-name" required>
-        <label for="org-admin-name">Owner Name</label>
+        <label for="org-name">PC Name</label>
+        <input type="text" id="org-name" name="org-name">
+        <label for="org-admin-name">PC Id</label>
         <input type="text" id="org-admin-name" name="org-admin-name" required>
-        <label for="org-admin-email">Owner Email</label>
+        <label for="org-admin-email">PC Admin Email</label>
         <input type="email" id="org-admin-email" name="org-admin-email" required>
-        <label for="org-admin-password">Owner Password</label>
+        <label for="org-admin-password">PC's Password</label>
         <input type="password" id="org-admin-password" name="org-admin-password" required>
         <label for="org-admin-repeat-password">Repeat Password</label>
         <input type="password" id="org-admin-repeat-password" name="org-admin-repeat-password" required>
-        <label for="org-gst-number">GST Number:</label>
-        <input type="text" id="org-gst-number" name="org-gst-number" required />
-
-        <label for="org-registered-year">Registered Year:</label>
-        <input type="text" id="org-registered-year" name="org-registered-year" required />
-
-    
         <label for="org-admin-gender">Gender</label>
-        <select id="org-admin-gender" name="org-admin-gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <label for="org-admin-address">Organization Address</label>
+        <label for="org-admin-address">Site Address or Department Address</label>
         <textarea id="org-admin-address" name="org-admin-address" required></textarea>
-        <label for="org-admin-mobile">Owner Mobile Number(Num1:123xxx/Num2:4567xxx)</label>
+        <label for="org-admin-mobile">Mobile Number (<span style="color: red">*</span>Available on Whatsapp)</label>
         <input type="tel" id="org-admin-mobile" name="org-admin-mobile" required>
         <button type="submit" id="save-organization-button">Save</button>
       </form>
