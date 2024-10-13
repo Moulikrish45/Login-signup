@@ -12,13 +12,13 @@
   </div>
   <header>
     <h1>Super Admin Dashboard</h1>
-    <button id="add-organization-button">Add Organization</button>
+    <button id="add-organization-button">Add Organization Owner</button>
   </header>
 
   <main>
     <section id="organization-list">
-      <h2>Organizations</h2>
-      <div id="fallback-message" style="display: none;">No organizations found. Please add a new organization.</div>
+      <h2>Organizations Owners</h2>
+      <div id="fallback-message" style="display: none;">No organizations owners found. Please add a new owner.</div>
       <ul id="organizations">
         <!-- Organizations will be dynamically generated here -->
       </ul>
@@ -36,32 +36,25 @@
   <div id="organization-modal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
-      <h2 id="modal-title">Add Organization</h2>
+      <h2 id="modal-title">Add Organization Owner</h2>
       <form id="organization-form">
-        <label for="org-name">Organization Name</label>
+        <label for="org-name">Owner Name</label>
         <input type="text" id="org-name" name="org-name" required>
-        <label for="org-admin-name">Owner Name</label>
-        <input type="text" id="org-admin-name" name="org-admin-name" required>
+        <!-- <label for="org-admin-name">Owner Name</label>
+        <input type="text" id="org-admin-name" name="org-admin-name" required> -->
         <label for="org-admin-email">Owner Email</label>
         <input type="email" id="org-admin-email" name="org-admin-email" required>
         <label for="org-admin-password">Owner Password</label>
         <input type="password" id="org-admin-password" name="org-admin-password" required>
         <label for="org-admin-repeat-password">Repeat Password</label>
         <input type="password" id="org-admin-repeat-password" name="org-admin-repeat-password" required>
-        <label for="org-gst-number">GST Number:</label>
-        <input type="text" id="org-gst-number" name="org-gst-number" required />
-
-        <label for="org-registered-year">Registered Year:</label>
-        <input type="text" id="org-registered-year" name="org-registered-year" required />
-
-    
         <label for="org-admin-gender">Gender</label>
         <select id="org-admin-gender" name="org-admin-gender" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-        <label for="org-admin-address">Organization Address</label>
+        <label for="org-admin-address">Organization Owners Address</label>
         <textarea id="org-admin-address" name="org-admin-address" required></textarea>
         <label for="org-admin-mobile">Owner Mobile Number(Num1:123xxx/Num2:4567xxx)</label>
         <input type="tel" id="org-admin-mobile" name="org-admin-mobile" required>

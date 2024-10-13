@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?';
+  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=MNHnnDB-TTRk3vo0Hr4Gk9rfh21zAwoeRilONYSWjGHaAzFuVkiC8A%3D%3D';
   const API_CREATE_USER = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/createuser?';
 
   let organizations = []; // Start with an empty array for dynamic updates
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Prepare request body
     const requestBody = {
-      userrole: 'Admin'
+      userrole: 'Owner'
     };
 
     fetch(API_GET_ORGANIZATIONS, {
@@ -212,12 +212,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const requestBody = {
       useremail: org.user_email,
       password: organizationForm['org-admin-password'].value, // Use the password from the form
-      userrole: 'Admin',
-      address: org.user_address,
-      adminName: org.user_name,
-      organizationName: org.user_name,
-      mobileNumber: org.user_mobile_1,
-      gender: org.user_gender
+      userrole: 'Owner',
+      user_name: org.user_name,
+      userMobile1:org.user_mobile_1,
+      gender: org.user_gender,
+      userAddress: org.user_address,
     };
 
     fetch(API_CREATE_USER, {
