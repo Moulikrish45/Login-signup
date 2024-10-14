@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=RNqEbinzwcqGRnHlgTdFrOWhhwe2q7OVZ5HeB5kN9cgMAzFurgLtbA%3D%3D';
+  const API_GET_ORGANIZATIONS = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/getUserList?code=MNHnnDB-TTRk3vo0Hr4Gk9rfh21zAwoeRilONYSWjGHaAzFuVkiC8A%3D%3D';
   const API_CREATE_USER = 'https://mdashttptriggersfunctionapp.azurewebsites.net/api/createuser?';
 
   let organizations = [];
