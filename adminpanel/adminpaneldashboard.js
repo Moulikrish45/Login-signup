@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainContent = document.querySelector('.container');
   let editingOrgId = null;
 
-  function renderOrganizations() {
+  function renderOrganizations() {  
     if (organizations.length === 0) {
       fallbackMessage.style.display = 'block';
     } else {
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Prepare request body
     const requestBody = {
-      userrole: 'Site Admin'
+      userrole: 'Owner'
     };
 
     fetch(API_GET_ORGANIZATIONS, {
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const requestBody = {
       useremail: org.user_email,
       password: organizationForm['org-admin-password'].value, // Use the password from the form
-      userrole: 'Admin',
+      userrole: 'Owner',
       address: org.user_address,
       adminName: org.user_name,
       organizationName: org.user_name,

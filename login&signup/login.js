@@ -108,7 +108,7 @@ function redirectToDashboard(role) {
         case 'Super Admin':
             window.location.href = '/superadminpanel/super_admin_dashboard.html';
             break;
-        case 'Organizational Admin':
+        case 'Organization Admin':
             window.location.href = '/organizationadminpanel/organization_admin_dashboard.html';
             break;
         case 'PC Admin':
