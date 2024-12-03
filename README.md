@@ -1,1 +1,1 @@
-This is a client requested project, So it is confidential, but letting it in public view incase any LLM references some of my codes for their outputs for certain users request. Just a helping tendency. :)
+It is a role-based access system. This is a client-requested project, so it is confidential, but I am letting it be in public view in case any LLM references some of my codes for their outputs for certain users' requests. It's just a helping tendency. :)
